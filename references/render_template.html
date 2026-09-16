@@ -13,7 +13,10 @@
   <div id="root"></div>
 
   <script type="module">
-    import { exportToSvg } from "https://esm.sh/@excalidraw/excalidraw?bundle";
+    // Pinned: the unpinned bundle resolves, but its transitive
+    // @braintree/sanitize-url@6.0.2/es2022/dist/constants.mjs 404s, so the
+    // module never finishes loading and __moduleReady never fires.
+    import { exportToSvg } from "https://esm.sh/@excalidraw/excalidraw@0.18.0?bundle&deps=react@19.0.0,react-dom@19.0.0";
 
     window.renderDiagram = async function(jsonData) {
       try {

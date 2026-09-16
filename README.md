@@ -44,6 +44,22 @@ Ask your coding agent to create a diagram:
 
 The skill handles the rest — concept mapping, layout, JSON generation, rendering, and visual validation.
 
+## Share a Diagram
+
+Turn a local `.excalidraw` file into a link anyone can open, pan, and edit:
+
+```bash
+node references/excalidraw_share.mjs publish diagram.excalidraw
+# https://excalidraw.com/#json=<id>,<key>
+
+node references/excalidraw_share.mjs fetch "https://excalidraw.com/#json=<id>,<key>"
+# the scene JSON
+```
+
+Node's `crypto` and `zlib` only — nothing to install. Note that excalidraw.com has no update
+endpoint: editing a shared scene in the browser mints a **new** link, so treat a published URL as a
+snapshot rather than a live document.
+
 ## Customize Colors
 
 Edit `references/color-palette.md` to match your brand. Everything else in the skill is universal design methodology.
@@ -59,5 +75,6 @@ excalidraw-diagram/
     json-schema.md                  # Excalidraw JSON format reference
     render_excalidraw.py            # Render .excalidraw to PNG
     render_template.html            # Browser template for rendering
+    excalidraw_share.mjs            # Publish to / fetch from excalidraw.com share links
     pyproject.toml                  # Python dependencies (playwright)
 ```
