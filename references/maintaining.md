@@ -18,8 +18,16 @@ practices.
 `render_template.html` pins its import:
 
 ```js
-import { exportToSvg } from "https://esm.sh/@excalidraw/excalidraw@0.18.0?bundle&deps=react@19.0.0,react-dom@19.0.0";
+import { exportToSvg } from "https://esm.sh/@excalidraw/excalidraw@0.18.0-143b5b6?bundle&deps=react@19.0.0,react-dom@19.0.0";
 ```
+
+The version is an npm pre-release on purpose. Sticky notes (`"type": "stickynote"`, the `N` tool)
+landed upstream in excalidraw/excalidraw#12064 after the last stable release (0.18.1). Stable
+`restore` silently filters element types it doesn't know, so on 0.18.x a note vanishes from the
+render and its label floats loose — and the render-view-fix loop then "fixes" a note that was never
+broken. Drawings with notes come from a patched VS Code extension built on this same pre-release
+(see `~/dev/excalidraw-sticky-notes/LEDGER.md`). Move back to a stable pin only once a stable
+release includes sticky notes.
 
 The unpinned `@excalidraw/excalidraw?bundle` returns 200, which is what makes this expensive to
 diagnose. But a transitive dependency, `@braintree/sanitize-url@6.0.2/es2022/dist/constants.mjs`,
